@@ -1,0 +1,18 @@
+Swap the adjacent node. Medium No.24 from LeetCode.
+
+Given a linked list, swap every two adjacent nodes and return its head. You must solve the problem without modifying the values in the list's nodes (i.e., only nodes themselves may be changed.)
+
+Code:
+{
+		class Solution {
+			public:
+   		ListNode* swapPairs(ListNode* head) {
+        ListNode* p=head;
+        ListNode* q=head;
+        if(!p) return head;
+        p=p->next;
+        while(p&&q) {int a=p->val;p->val=q->val;q->val=a;p=p->next;q=q->next;if(!p||!q) return head; p=p->next;q=q->next;}
+        return head;
+    		}
+		};
+}
