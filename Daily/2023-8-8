@@ -1,0 +1,29 @@
+Maximum Absolute Sum of Any Subarray  Medium 1749. Transformation of Maximum Subarray.
+
+
+Case 1: Simple Simulation
+Two-Dimension array to store all pairs sums.
+And easy to see ---MLE.
+
+Case 2:Maximum Or Minimum + Dp
+Well, copies of Maximum Subarray and return the Maximal absolute sum.
+
+Case 3:Presum
+All the subarrays are consequent.
+In the particular case, the whole array is the solution, the sum is.
+Generally, the largest sum is expected to be difference of two presums(especially let presum[0]=0). Problem transforms to seeking the maximum and minimum of presums.
+
+Code[Case 3]:
+                int maxAbsoluteSum(vector<int>& nums) {
+                        int Max=0,Min=0;  //Here let preSum[0]=0
+                        int sum=0;
+                        for(auto x:nums)
+                        {
+                            sum+=x;
+                            Max=max(Max,sum);
+                            Min=min(Min,sum);
+                        }
+                        return Max-Min;
+                    }
+Case 4:Two pointers---?
+similar to case 2  maintain the maximum and minimum.
