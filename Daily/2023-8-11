@@ -1,0 +1,37 @@
+Matrix Digonal sum    Easy 1572.
+As title. Note that when i==j, the element counts only once.
+
+Simple simulation Code:
+                              class Solution {
+                              public:
+                                  int diagonalSum(vector<vector<int>>& mat) {
+                                      int n=mat.size();
+                                      int sum=0;
+                                      for(int i=0;i<n;i++)
+                                      {
+                                          if(i!=n-1-i)
+                                          sum=sum+mat[i][i]+mat[i][n-i-1];
+                                          else sum+=mat[i][i];
+                                      }
+                                      return sum;
+                                  }
+                              };
+Routinely, poor performance.
+
+To reduce redundant operations, considering the "if" is the hurdle.
+Apparently, the result change according to odd and even of n
+
+Code:
+                              class Solution {
+                              public:
+                                  int diagonalSum(vector<vector<int>>& mat) {
+                                      int n=mat.size();
+                                      int sum=0;
+                                      for(int i=0;i<n;i++)
+                                      {
+                                          sum=sum+mat[i][i]+mat[i][n-i-1];
+                                      }
+                                      return sum-mat[n/2][n/2]*(n&1);
+                                  }
+                              };
+Elegant!
