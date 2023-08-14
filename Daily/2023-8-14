@@ -1,0 +1,32 @@
+Merge Two Binary Tree    Easy 617.
+
+merge two trees into one:
+-Combine nodes means sum..
+-If one is nullptr, New it.
+
+Case 1:Recurse(Dfs)
+Code:
+                              class Solution {
+                              public:
+                                  TreeNode* dfs(TreeNode* tree1,TreeNode* tree2)
+                                  {
+                                      if(!tree1&&!tree2) return nullptr;
+                                      if(!tree1) {return tree2;}
+                                      else if(!tree2)
+                                      {
+                                          return tree1;
+                                      }
+                                      else{
+                                          tree1->val=tree1->val+tree2->val;
+                                          tree1->left=dfs(tree1->left,tree2->left);
+                                          tree1->right=dfs(tree1->right,tree2->right);
+                                      }
+                                      return tree1;
+                                  }
+                                  TreeNode* mergeTrees(TreeNode* root1, TreeNode* root2) {
+                                      return dfs(root1,root2);
+                                  }
+                              };
+
+Case 2:Iteration(Bfs)
+This question demands too complicatedly, the lazy me. Give up.
