@@ -1,0 +1,54 @@
+Find and Replace in string    Medium 833.
+
+Find the given string in source string, and replace it with target string.
+
+Case 1:Simulation
+Easy, but it should be taken into account that given strings are not sorted according to index. So need a struct to sort them.
+
+Code: 
+                                    typedef struct {
+                                        int i;
+                                        string str;
+                                        string des;
+                                    } Ds;
+                                    bool cmp(Ds a,Ds b)
+                                    {
+                                        return a.i<b.i;
+                                    }
+                                    class Solution {
+                                    public:
+                                        bool Match(string str,string s,int l,int r)
+                                        {
+                                            string ps;
+                                            for(int i=l;i<r;i++) ps+=s[i];
+                                            return ps==str;
+                                        }
+                                        string findReplaceString(string s, vector<int>& indices, vector<string>& sources, vector<string>& targets) {
+                                            int n=indices.size();
+                                            vector<Ds> d(n);
+                                            for(int i=0;i<indices.size();i++)
+                                            {
+                                                d[i].i=indices[i];
+                                                d[i].str=sources[i];
+                                                d[i].des=targets[i];
+                                            }
+                                            sort(d.begin(),d.end(),cmp);
+                                            string ans;
+                                            int i=0;
+                                            int p=0;
+                                            while(i<s.size()&&p<n)
+                                            {
+                                                while(i<d[p].i) {ans+=s[i++];}
+                                                if(Match(d[p].str,s,i,i+d[p].str.size())) {ans+=d[p].des;i+=d[p].str.size();}
+                                                p++;
+                                            }
+                                            while(i<s.size()) ans+=s[i++];
+                                            return ans;
+                                        }
+                                    };
+Poor performance as prediction.
+Case 2:Hash Table.
+Iterate the given array, judge and record each one if match to replace.
+Here store the destionation substring in a table(vector).
+
+Lack of time, just record this idea.
