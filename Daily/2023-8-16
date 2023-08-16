@@ -1,0 +1,27 @@
+Almost forget. 
+Find the Losers of the Circular Game    Easy 2682.
+In brief, n denotes the number of people, k denotes step.
+Everyone passes the ball when received it, and every pass would add k step, the game ends when one received twice.
+It means, from 0-index start. The 0-index passes the ball two (0+k)%n, and the (0+k)%n-index would pass the ball to ((0+k)%n+2*k)%n, till end.
+
+Case 1:Too late, simply simulate.
+
+Code:  
+                            class Solution {
+                            public:
+                                vector<int> circularGameLosers(int n, int k) {
+                                    vector<int> rece(n,0);
+                                    int i=0;
+                                    int t=1;
+                                    while(rece[i]<1)
+                                    {
+                                        rece[i]++;
+                                        i=i+t*k;
+                                        t++;
+                                        i=i%n;
+                                    }
+                                    vector<int> ans;
+                                    for(int i=0;i<n;i++) if(!rece[i]) ans.push_back(i+1);
+                                    return ans;
+                                }
+                            };
